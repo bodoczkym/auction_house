@@ -23,4 +23,14 @@ public class AuctionServiceImpl implements AuctionService {
     public List<AuctionItem> getAuctionItems() {
         return auctionItemDAO.getAuctionItems();
     }
+
+    @Override
+    @Transactional
+    public void saveAuctionItem(AuctionItem theAuctionItem) {
+
+
+
+        auctionItemDAO.saveAuctionItem(theAuctionItem);
+
+    }
 }

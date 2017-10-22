@@ -9,7 +9,7 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <h2>Auction items:</h2>
+        <h2>AHM - Auction House Manager</h2>
     </div>
 </div>
 
@@ -18,7 +18,10 @@
     <div id="content">
         <!-- add auction item button -->
         <!-- TODO use thymeleaf form tags instead of normal html -->
-        <input type="button" value="Add Item" onclick="window.location.href='showFormForAdd'; return false;" />
+        <input type="button" value="Add Item"
+               onclick="window.location.href='showFormForAdd'; return false;"
+               class="add-button"
+        />
 
         <!--  add our html table here  -->
         <table>

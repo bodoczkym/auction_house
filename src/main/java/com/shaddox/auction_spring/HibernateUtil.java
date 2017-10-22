@@ -21,7 +21,7 @@ public class HibernateUtil {
             prop.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 
             concreteSessionFactory = new Configuration()
-                    .addPackage("com.shaddox.auction_spring.entity")
+                    .addPackage("com.shaddox.auction_spring")
                     .addProperties(prop)
                     .addAnnotatedClass(AuctionItem.class)
                     .buildSessionFactory();

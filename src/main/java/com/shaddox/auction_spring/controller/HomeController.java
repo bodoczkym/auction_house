@@ -16,9 +16,4 @@ public class HomeController {
     public String home () {
         return "redirect:auction_item/list";
     }
-
-    @GetMapping("auction_item/showFormForAdd")
-    public String showHome () {
-        return "home";
-    }
 }

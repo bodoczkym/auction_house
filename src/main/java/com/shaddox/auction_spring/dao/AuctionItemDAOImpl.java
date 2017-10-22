@@ -1,7 +1,9 @@
 package com.shaddox.auction_spring.dao;
 
 import com.shaddox.auction_spring.HibernateUtil;
+import com.shaddox.auction_spring.controller.AuctionItemController;
 import com.shaddox.auction_spring.entity.AuctionItem;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Repository
 public class AuctionItemDAOImpl implements AuctionItemDAO {
+    private static final Logger LOGGER = Logger.getLogger(AuctionItemDAOImpl.class);
 
 
     // need to inject the session factory
@@ -24,7 +27,7 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
     public List<AuctionItem> getAuctionItems() {
 
         // get the current Hibernate session
-        // TODO should add this as a dependency instead of a static method, but it works fine.
+        // TODO should add this as a dependency instead of a static method. This works fine, but it is closely coupled, which is not ideal.
         Session currentSession = HibernateUtil.getSession();
 
         // create a query
@@ -35,5 +38,21 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
 
         // return the results
         return auctionItems;
+    }
+
+    @Override
+    @Transactional
+    public void saveAuctionItem(AuctionItem theAuctionItem) {
+
+        // get current hibernate session
+        Session currentSession = HibernateUtil.getSession();
+
+        LOGGER.info("AuctionItemDAOImpl: saveAuctionItem");
+        LOGGER.info("AuctionItemDAOImpl item name: " + theAuctionItem.getName());
+        LOGGER.info("AuctionItemDAOImpl item price: " + theAuctionItem.getPrice());
+        LOGGER.info("AuctionItemDAOImpl item type: " + theAuctionItem.getPrice().getClass());
+
+        // save the customer
+        currentSession.save(theAuctionItem);
     }
 }

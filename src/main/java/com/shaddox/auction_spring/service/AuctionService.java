@@ -6,8 +6,10 @@ import com.shaddox.auction_spring.entity.Bidder;
 import java.util.List;
 
 public interface AuctionService {
-    public List<AuctionItem> getAuctionItems();
+    List<AuctionItem> getAuctionItems();
 
     // TODO add bidders
     //public List<Bidder> getBidders();
+
+    public void saveAuctionItem (AuctionItem auctionItem);
 }
