@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>List auction items</title>
+    <link href="../static/css/add-customer-style.css" th:href="@{/css/add-customer-style.css}" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <h2>Auction items:</h2>
+    </div>
+</div>
+
+<div id="container">
+
+    <div id="content">
+        <!-- add auction item button -->
+        <!-- TODO use thymeleaf form tags instead of normal html -->
+        <input type="button" value="Add Item" onclick="window.location.href='showFormForAdd'; return false;" />
+
+        <!--  add our html table here  -->
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+
+            <tr th:each="item : ${auction_items}">
+                <td th:text="${item.name}">Name goes here</td>
+                <td th:text="${item.price}">Price ...</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>
