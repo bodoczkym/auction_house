@@ -41,18 +41,18 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
     }
 
     @Override
-    @Transactional
     public void saveAuctionItem(AuctionItem theAuctionItem) {
 
         // get current hibernate session
         Session currentSession = HibernateUtil.getSession();
 
-        LOGGER.info("AuctionItemDAOImpl: saveAuctionItem");
-        LOGGER.info("AuctionItemDAOImpl item name: " + theAuctionItem.getName());
-        LOGGER.info("AuctionItemDAOImpl item price: " + theAuctionItem.getPrice());
-        LOGGER.info("AuctionItemDAOImpl item type: " + theAuctionItem.getPrice().getClass());
+        // begin transaction
+        currentSession.beginTransaction();
 
         // save the customer
         currentSession.save(theAuctionItem);
+
+        // commit the transaction
+        currentSession.getTransaction().commit();
     }
 }

@@ -49,13 +49,13 @@ public class AuctionItemController {
     }
 
     @PostMapping("/saveAuctionItem")
-    public String saveAuctionItem (@ModelAttribute("auction_item") AuctionItem theAuctionItem) {
+    public String saveAuctionItem (@ModelAttribute("current_auction_item}") AuctionItem theAuctionItem) {
 
-        LOGGER.info("AuctionItemController :saveAuctionItem method started.");
-
-        LOGGER.info("auction item name: " + theAuctionItem.getName());
-        LOGGER.info("auction item price: " + theAuctionItem.getPrice());
-        LOGGER.info("auction item type: " + theAuctionItem.getPrice().getClass());
+//        LOGGER.info("AuctionItemController :saveAuctionItem method started.");
+//
+//        LOGGER.info("auction item name: " + theAuctionItem.getName());
+//        LOGGER.info("auction item price: " + theAuctionItem.getPrice());
+//        LOGGER.info("auction item type: " + theAuctionItem.getPrice().getClass());
 
         auctionService.saveAuctionItem(theAuctionItem);
 

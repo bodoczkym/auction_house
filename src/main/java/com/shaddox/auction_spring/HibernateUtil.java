@@ -33,4 +33,26 @@ public class HibernateUtil {
     public static Session getSession() throws HibernateException {
         return concreteSessionFactory.openSession();
     }
+
+    public static void main(String[] args) {
+        try {
+            Session session = getSession();
+
+            System.out.println("Creating new AuctionItem");
+            AuctionItem tempAuctionItem = new AuctionItem("Loxon Java Challenge", 5000);
+
+            session.beginTransaction();
+
+            System.out.println("Saving AuctionItem object");
+            session.save(tempAuctionItem);
+
+            session.getTransaction().commit();
+
+            System.out.println("Done!");
+
+        }
+        finally {
+
+        }
+    }
 }
