@@ -11,5 +11,7 @@ public interface AuctionService {
     // TODO add bidders
     //public List<Bidder> getBidders();
 
-    public void saveAuctionItem (AuctionItem auctionItem);
+    void saveAuctionItem (AuctionItem auctionItem);
+
+    AuctionItem getAuctionItem(int theId);
 }

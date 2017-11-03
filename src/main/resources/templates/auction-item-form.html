@@ -19,10 +19,14 @@
 <div id="container">
     <h3> Save Auction Item </h3>
 
+
     <form action="#" th:action="@{/auction_item/saveAuctionItem}" th:object="${auction_item}" method="post">
+
+        <!-- this is to associate this date with auction item id -->
+        <input type="hidden" th:field="*{id}"/>
+
         <table>
             <tbody>
-
             <tr>
                 <td><label>Name:</label></td>
                 <td><input type="text" th:field="*{name}"/></td>

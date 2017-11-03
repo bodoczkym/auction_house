@@ -31,7 +31,7 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
         Session currentSession = HibernateUtil.getSession();
 
         // create a query
-        Query<AuctionItem> theQuery = currentSession.createQuery("from AuctionItem", AuctionItem.class);
+        Query<AuctionItem> theQuery = currentSession.createQuery("from AuctionItem order by name", AuctionItem.class);
 
         // execute a query and get result list
         List<AuctionItem> auctionItems = theQuery.getResultList();
@@ -49,10 +49,24 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
         // begin transaction
         currentSession.beginTransaction();
 
-        // save the customer
-        currentSession.save(theAuctionItem);
+        // save/update the customer
+        currentSession.saveOrUpdate(theAuctionItem);
 
         // commit the transaction
         currentSession.getTransaction().commit();
+    }
+
+    @Override
+    public AuctionItem getAuctionItem(int theId) {
+
+        // get the current hibernate session
+        Session currentSession = HibernateUtil.getSession();
+
+        // retrieve/read from database using the primary key
+        AuctionItem theAuctionItem = currentSession.get(AuctionItem.class, theId);
+
+        // return the auction item
+        return theAuctionItem;
+
     }
 }

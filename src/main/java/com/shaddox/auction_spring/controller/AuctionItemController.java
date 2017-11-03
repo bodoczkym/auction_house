@@ -1,16 +1,12 @@
 package com.shaddox.auction_spring.controller;
 
-import com.shaddox.auction_spring.dao.AuctionItemDAO;
 import com.shaddox.auction_spring.entity.AuctionItem;
 import com.shaddox.auction_spring.service.AuctionService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -51,14 +47,27 @@ public class AuctionItemController {
     @PostMapping("/saveAuctionItem")
     public String saveAuctionItem (@ModelAttribute("current_auction_item}") AuctionItem theAuctionItem) {
 
-//        LOGGER.info("AuctionItemController :saveAuctionItem method started.");
-//
-//        LOGGER.info("auction item name: " + theAuctionItem.getName());
-//        LOGGER.info("auction item price: " + theAuctionItem.getPrice());
-//        LOGGER.info("auction item type: " + theAuctionItem.getPrice().getClass());
+        LOGGER.info("AuctionItemController :saveAuctionItem method started.");
+
+        LOGGER.info("auction item name: " + theAuctionItem.getName());
+        LOGGER.info("auction item price: " + theAuctionItem.getPrice());
+        LOGGER.info("auction item type: " + theAuctionItem.getPrice().getClass());
 
         auctionService.saveAuctionItem(theAuctionItem);
 
         return "redirect:/auction_item/list";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate (@RequestParam("auctionItemId") int theId, Model theModel) {
+        // get the auction item from our service
+        AuctionItem theAuctionItem = auctionService.getAuctionItem(theId);
+
+        // set auction item as a model attribute to pre-populate the form
+        theModel.addAttribute("auction_item", theAuctionItem);
+
+        // send over to our form
+        return "auction-item-form";
+
     }
 }

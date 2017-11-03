@@ -28,11 +28,13 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
 
             <tr th:each="item : ${auction_items}">
                 <td th:text="${item.name}">Name goes here</td>
                 <td th:text="${item.price}">Price ...</td>
+                <td><a th:href="@{/auction_item/showFormForUpdate(auctionItemId=${item.id})}">Update</a></td>
             </tr>
         </table>
     </div>

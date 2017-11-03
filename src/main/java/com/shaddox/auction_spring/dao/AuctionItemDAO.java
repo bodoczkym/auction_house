@@ -8,4 +8,6 @@ public interface AuctionItemDAO {
     List<AuctionItem> getAuctionItems ();
 
     void saveAuctionItem(AuctionItem theAuctionItem);
+
+    AuctionItem getAuctionItem(int theId);
 }
