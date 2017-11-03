@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -67,6 +66,22 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
 
         // return the auction item
         return theAuctionItem;
+    }
 
+    @Override
+    public void deleteAuctionItem(int theId) {
+
+        // get the current hibernate session
+        Session currentSession = HibernateUtil.getSession();
+
+        currentSession.beginTransaction();
+
+        // delete object with primary key
+        Query theQuery = currentSession.createQuery("delete from AuctionItem where id=:auctionItemId");
+        theQuery.setParameter("auctionItemId", theId);
+
+        theQuery.executeUpdate();
+
+        currentSession.getTransaction().commit();
     }
 }

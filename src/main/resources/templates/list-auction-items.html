@@ -34,7 +34,14 @@
             <tr th:each="item : ${auction_items}">
                 <td th:text="${item.name}">Name goes here</td>
                 <td th:text="${item.price}">Price ...</td>
-                <td><a th:href="@{/auction_item/showFormForUpdate(auctionItemId=${item.id})}">Update</a></td>
+
+                <!-- TODO refactor links to be outside of the table, with local references pointing towards them -->
+                <!-- display the update link -->
+                <td><a th:href="@{/auction_item/showFormForUpdate(auctionItemId=${item.id})}">Update</a>
+                    |
+                    <a onclick="return confirm('Are you sure you want to delete this auction item?');"
+                       th:href="@{/auction_item/delete(auctionItemId=${item.id})}">Delete</a>
+                </td>
             </tr>
         </table>
     </div>

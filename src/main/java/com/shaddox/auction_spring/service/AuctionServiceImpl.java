@@ -26,6 +26,8 @@ public class AuctionServiceImpl implements AuctionService {
         return auctionItemDAO.getAuctionItems();
     }
 
+    // TODO @Transactional not working for some reason, need to understand the mechanics of it
+
     @Override
     @Transactional
     public void saveAuctionItem(AuctionItem theAuctionItem) {
@@ -38,5 +40,11 @@ public class AuctionServiceImpl implements AuctionService {
     @Transactional
     public AuctionItem getAuctionItem(int theId) {
         return auctionItemDAO.getAuctionItem(theId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCustomer(int theId) {
+        auctionItemDAO.deleteAuctionItem(theId);
     }
 }

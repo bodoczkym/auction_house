@@ -1,7 +1,6 @@
 package com.shaddox.auction_spring.service;
 
 import com.shaddox.auction_spring.entity.AuctionItem;
-import com.shaddox.auction_spring.entity.Bidder;
 
 import java.util.List;
 
@@ -14,4 +13,6 @@ public interface AuctionService {
     void saveAuctionItem (AuctionItem auctionItem);
 
     AuctionItem getAuctionItem(int theId);
+
+    void deleteCustomer(int theId);
 }

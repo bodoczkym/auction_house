@@ -10,4 +10,6 @@ public interface AuctionItemDAO {
     void saveAuctionItem(AuctionItem theAuctionItem);
 
     AuctionItem getAuctionItem(int theId);
+
+    void deleteAuctionItem(int theId);
 }

@@ -68,6 +68,14 @@ public class AuctionItemController {
 
         // send over to our form
         return "auction-item-form";
+    }
 
+    @GetMapping("/delete")
+    public String deleteAuctionItem(@RequestParam("auctionItemId") int theId) {
+
+        // delete the customer
+        auctionService.deleteCustomer(theId);
+
+        return "redirect:/auction_item/list";
     }
 }
