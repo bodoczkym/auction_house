@@ -1,4 +1,47 @@
 package com.shaddox.auction_spring.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "bidder")
 public class Bidder {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    public Bidder() {
+    }
+
+    public Bidder(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Bidder{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -3,20 +3,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Good Thymes Virtual Grocery</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Auction House Managery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" media="all"
-          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+          href="../../css/gtvg.css" th:href="@{/css/gtvg.css}"/>
 </head>
 
 <body>
 
-<p>Welcome to our grocery store!</p>
+<h1 style="font-size:45px;">Welcome to our Auction House!</h1>
 
-<form action="#" data-th-action="@{/sendData}">
-    <button type="submit" name="action" value="save">save</button>
-    <button type="submit" name="action" value="cancel">cancel</button>
-</form>
+<div>
+    <p style="font-size:150%;"><a th:href="@{/auction_item/list}">Go to Auction Items</a></p>
+</div>
+
+<div>
+    <p style="font-size:150%;"><a th:href="@{/bidder/list}">Go to Bidders</a></p>
+</div>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ import com.shaddox.auction_spring.entity.AuctionItem;
 import java.util.List;
 
 public interface AuctionItemDAO {
-    List<AuctionItem> getAuctionItems ();
+    List<AuctionItem> getAuctionItems();
 
     void saveAuctionItem(AuctionItem theAuctionItem);
 

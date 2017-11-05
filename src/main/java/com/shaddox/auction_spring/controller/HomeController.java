@@ -14,6 +14,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home () {
-        return "redirect:auction_item/list";
+        return "home";
     }
 }

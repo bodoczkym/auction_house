@@ -1,6 +1,7 @@
 package com.shaddox.auction_spring;
 
 import com.shaddox.auction_spring.entity.AuctionItem;
+import com.shaddox.auction_spring.entity.Bidder;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,10 +21,12 @@ public class HibernateUtil {
             prop.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
             prop.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 
+            // need to add configuration when adding new tables!
             concreteSessionFactory = new Configuration()
                     .addPackage("com.shaddox.auction_spring")
                     .addProperties(prop)
                     .addAnnotatedClass(AuctionItem.class)
+                    .addAnnotatedClass(Bidder.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
@@ -32,27 +35,5 @@ public class HibernateUtil {
 
     public static Session getSession() throws HibernateException {
         return concreteSessionFactory.openSession();
-    }
-
-    public static void main(String[] args) {
-        try {
-            Session session = getSession();
-
-            System.out.println("Creating new AuctionItem");
-            AuctionItem tempAuctionItem = new AuctionItem("Loxon Java Challenge", 5000);
-
-            session.beginTransaction();
-
-            System.out.println("Saving AuctionItem object");
-            session.save(tempAuctionItem);
-
-            session.getTransaction().commit();
-
-            System.out.println("Done!");
-
-        }
-        finally {
-
-        }
     }
 }

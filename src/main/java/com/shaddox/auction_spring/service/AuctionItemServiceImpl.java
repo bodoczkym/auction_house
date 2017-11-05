@@ -1,9 +1,7 @@
 package com.shaddox.auction_spring.service;
 
-import com.shaddox.auction_spring.controller.AuctionItemController;
 import com.shaddox.auction_spring.dao.AuctionItemDAO;
 import com.shaddox.auction_spring.entity.AuctionItem;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class AuctionServiceImpl implements AuctionService {
+public class AuctionItemServiceImpl implements AuctionItemService {
 
     // need to inject auction item dao
     @Autowired

@@ -1,7 +1,7 @@
 package com.shaddox.auction_spring.controller;
 
 import com.shaddox.auction_spring.entity.AuctionItem;
-import com.shaddox.auction_spring.service.AuctionService;
+import com.shaddox.auction_spring.service.AuctionItemService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,18 +14,18 @@ import java.util.List;
 @RequestMapping ("/auction_item")
 public class AuctionItemController {
 
-    private static final Logger LOGGER = Logger.getLogger(AuctionItemController.class);
+//    private static final Logger LOGGER = Logger.getLogger(AuctionItemController.class);
 
     // need to inject our customer service
     @Autowired
-    private AuctionService auctionService;
+    private AuctionItemService auctionItemService;
 
     // @GetMapping annotation will only respond to GET requests (instead of the normal @RequestMapping)
     @GetMapping("/list")
     public String listAuctionItems (Model theModel) {
 
-        // get the auction items from the sevice
-        List<AuctionItem> theAuctionItems = auctionService.getAuctionItems();
+        // get the auction items from the service
+        List<AuctionItem> theAuctionItems = auctionItemService.getAuctionItems();
 
         // add the auction items to the model
         theModel.addAttribute("auction_items", theAuctionItems);
@@ -47,21 +47,16 @@ public class AuctionItemController {
     @PostMapping("/saveAuctionItem")
     public String saveAuctionItem (@ModelAttribute("current_auction_item}") AuctionItem theAuctionItem) {
 
-        LOGGER.info("AuctionItemController :saveAuctionItem method started.");
-
-        LOGGER.info("auction item name: " + theAuctionItem.getName());
-        LOGGER.info("auction item price: " + theAuctionItem.getPrice());
-        LOGGER.info("auction item type: " + theAuctionItem.getPrice().getClass());
-
-        auctionService.saveAuctionItem(theAuctionItem);
+        auctionItemService.saveAuctionItem(theAuctionItem);
 
         return "redirect:/auction_item/list";
     }
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate (@RequestParam("auctionItemId") int theId, Model theModel) {
+
         // get the auction item from our service
-        AuctionItem theAuctionItem = auctionService.getAuctionItem(theId);
+        AuctionItem theAuctionItem = auctionItemService.getAuctionItem(theId);
 
         // set auction item as a model attribute to pre-populate the form
         theModel.addAttribute("auction_item", theAuctionItem);
@@ -74,7 +69,7 @@ public class AuctionItemController {
     public String deleteAuctionItem(@RequestParam("auctionItemId") int theId) {
 
         // delete the customer
-        auctionService.deleteCustomer(theId);
+        auctionItemService.deleteCustomer(theId);
 
         return "redirect:/auction_item/list";
     }
