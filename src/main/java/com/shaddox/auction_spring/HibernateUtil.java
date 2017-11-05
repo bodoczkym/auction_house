@@ -1,6 +1,7 @@
 package com.shaddox.auction_spring;
 
 import com.shaddox.auction_spring.entity.AuctionItem;
+import com.shaddox.auction_spring.entity.Bid;
 import com.shaddox.auction_spring.entity.Bidder;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -27,6 +28,7 @@ public class HibernateUtil {
                     .addProperties(prop)
                     .addAnnotatedClass(AuctionItem.class)
                     .addAnnotatedClass(Bidder.class)
+                    .addAnnotatedClass(Bid.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
@@ -35,5 +37,48 @@ public class HibernateUtil {
 
     public static Session getSession() throws HibernateException {
         return concreteSessionFactory.openSession();
+    }
+
+    static Session currentSession;
+
+    public static void main(String[] args) {
+        try {
+            currentSession = getSession();
+
+//            AuctionItem tempAuctionItem = new AuctionItem("Eiffel-tower", 78500);
+//
+//            // create bids
+//            Bid tempBid1 = new Bid(80000);
+//            Bid tempBid2 = new Bid(85000);
+//
+//            // create bidders
+//            Bidder tempBidder1 = new Bidder("Vilmos");
+//            Bidder tempBidder2 = new Bidder("Emma");
+//
+//            tempBid1.setAuctionItem(tempAuctionItem);
+//            tempBid1.setBidder(tempBidder1);
+//            tempBid2.setAuctionItem(tempAuctionItem);
+//            tempBid2.setBidder(tempBidder2);
+
+
+//            currentSession.save(tempAuctionItem);
+//            currentSession.save(tempBidder1);
+//            currentSession.save(tempBidder2);
+//            currentSession.save(tempBid1);
+//            currentSession.save(tempBid2);
+
+            currentSession.beginTransaction();
+
+            int theId = 17;
+            AuctionItem tempAuctionItem = currentSession.get(AuctionItem.class, theId);
+            System.out.println("\nAuction item: " + tempAuctionItem);
+            System.out.println("\nCourses: " + tempAuctionItem.getBids());
+
+            currentSession.getTransaction().commit();
+
+            System.out.println("Done!");
+        } finally {
+            currentSession.close();
+        }
     }
 }
