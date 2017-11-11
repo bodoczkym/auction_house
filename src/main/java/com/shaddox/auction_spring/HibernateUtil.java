@@ -67,12 +67,30 @@ public class HibernateUtil {
 //            currentSession.save(tempBid1);
 //            currentSession.save(tempBid2);
 
+            //            To retrieve auction item
+
+//            int theId = 17;
+//            AuctionItem tempAuctionItem = currentSession.get(AuctionItem.class, theId);
+//            System.out.println("\nAuction item: " + tempAuctionItem);
+//            System.out.println("\nBids: " + tempAuctionItem.getBids());
+
+            AuctionItem tempAuctionItem = new AuctionItem("Tuzhely", 900);
+
+            Bid tempBid1 = new Bid(990);
+
+            Bidder tempBidder1 = new Bidder("Vilmos");
+
+            tempBid1.setBidder(tempBidder1);
+            tempBid1.setAuctionItem(tempAuctionItem);
+
+
+            tempAuctionItem.setHighestBid(tempBid1);
+
             currentSession.beginTransaction();
 
-            int theId = 17;
-            AuctionItem tempAuctionItem = currentSession.get(AuctionItem.class, theId);
-            System.out.println("\nAuction item: " + tempAuctionItem);
-            System.out.println("\nCourses: " + tempAuctionItem.getBids());
+            currentSession.save(tempBidder1);
+            currentSession.save(tempAuctionItem);
+            currentSession.save(tempBid1);
 
             currentSession.getTransaction().commit();
 

@@ -1,8 +1,7 @@
 package com.shaddox.auction_spring.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "auction_item")
@@ -19,10 +18,9 @@ public class AuctionItem {
     @Column(name = "price")
     private Integer price;
 
-    @OneToMany(mappedBy = "auctionItem", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                    CascadeType.DETACH, CascadeType.REFRESH})
-    private Set<Bid> bids;
+    @OneToOne(mappedBy = "auctionItem", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Bid highestBid;
 
     public AuctionItem() {
     }
@@ -56,20 +54,12 @@ public class AuctionItem {
         this.id = id;
     }
 
-    public Set<Bid> getBids() {
-        return bids;
+    public Bid getHighestBid() {
+        return highestBid;
     }
 
-    public void setBids(Set<Bid> bids) {
-        this.bids = bids;
-    }
-
-    // add a convenience method
-    public void addBid(Bid theBid) {
-        if (bids == null) {
-            bids = new HashSet<>();
-        }
-        bids.add(theBid);
+    public void setHighestBid(Bid highestBid) {
+        this.highestBid = highestBid;
     }
 
     @Override

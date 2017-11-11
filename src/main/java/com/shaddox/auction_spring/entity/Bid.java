@@ -17,7 +17,7 @@ public class Bid {
     @JoinColumn(name = "bidder_id")
     private Bidder bidder;
 
-    @ManyToOne(fetch = FetchType.LAZY,
+    @OneToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "auction_item_id")

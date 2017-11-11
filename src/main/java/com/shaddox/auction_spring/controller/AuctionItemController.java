@@ -1,6 +1,7 @@
 package com.shaddox.auction_spring.controller;
 
 import com.shaddox.auction_spring.entity.AuctionItem;
+import com.shaddox.auction_spring.entity.Bid;
 import com.shaddox.auction_spring.service.AuctionItemService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping ("/auction_item")
+@RequestMapping("/auction_item")
 public class AuctionItemController {
 
 //    private static final Logger LOGGER = Logger.getLogger(AuctionItemController.class);
@@ -22,7 +24,7 @@ public class AuctionItemController {
 
     // @GetMapping annotation will only respond to GET requests (instead of the normal @RequestMapping)
     @GetMapping("/list")
-    public String listAuctionItems (Model theModel) {
+    public String listAuctionItems(Model theModel) {
 
         // get the auction items from the service
         List<AuctionItem> theAuctionItems = auctionItemService.getAuctionItems();
@@ -34,7 +36,7 @@ public class AuctionItemController {
     }
 
     @GetMapping("/showFormForAdd")
-    public String showFormForAdd (Model theModel) {
+    public String showFormForAdd(Model theModel) {
 
         // create model attribute to bind form data
         AuctionItem theAuctionItem = new AuctionItem();
@@ -45,7 +47,7 @@ public class AuctionItemController {
     }
 
     @PostMapping("/saveAuctionItem")
-    public String saveAuctionItem (@ModelAttribute("current_auction_item}") AuctionItem theAuctionItem) {
+    public String saveAuctionItem(@ModelAttribute("current_auction_item}") AuctionItem theAuctionItem) {
 
         auctionItemService.saveAuctionItem(theAuctionItem);
 
@@ -53,7 +55,7 @@ public class AuctionItemController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate (@RequestParam("auctionItemId") int theId, Model theModel) {
+    public String showFormForUpdate(@RequestParam("auctionItemId") int theId, Model theModel) {
 
         // get the auction item from our service
         AuctionItem theAuctionItem = auctionItemService.getAuctionItem(theId);

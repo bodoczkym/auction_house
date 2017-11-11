@@ -14,6 +14,7 @@
 </div>
 
 <div id="container">
+<<<<<<< Updated upstream:src/main/resources/templates/list-bids.html
 
     <div id="content">
 
@@ -21,10 +22,19 @@
                onclick="window.location.href='showFormForAdd'; return false;"
                class="add-button"
         />
+=======
+    <h3> Save Bid </h3>
+
+
+    <form action="#" th:action="@{/bids/saveBid}" th:object="${bid}" method="post">
+
+        <input type="hidden" th:field="*{bidId}"/>
+>>>>>>> Stashed changes:src/main/resources/templates/bid-form.html
 
         <!--  add our html table here  -->
         <table>
             <tr>
+<<<<<<< Updated upstream:src/main/resources/templates/list-bids.html
                 <th>Name</th>
                 <th>Action</th>
             </tr>
@@ -42,6 +52,22 @@
                 </td>
             </tr>
         </table>
+=======
+                <td><label>Name:</label></td>
+                <td><input type="text" th:field="*{bid_amount}"/></td>
+            </tr>
+
+            <tr>
+                <td><label></label></td>
+                <td><input type="submit" value="Save"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <p>
+        <a th:href="@{/auction_item/list}">Back to list</a>
+    </p>
+>>>>>>> Stashed changes:src/main/resources/templates/bid-form.html
 
         <p>
             <a th:href="@{/}">Back to homepage</a>

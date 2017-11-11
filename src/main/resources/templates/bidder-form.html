@@ -22,7 +22,7 @@
 
     <form action="#" th:action="@{/bidder/saveBidder}" th:object="${bidder}" method="post">
 
-        <!-- this is to associate this date with auction item id -->
+        <!-- this is to associate this date with bidder id -->
         <input type="hidden" th:field="*{id}"/>
 
         <table>
