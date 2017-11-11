@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List auction items</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../static/css/add-customer-style.css" th:href="@{/css/add-customer-style.css}" rel="stylesheet"/>
+
+</head>
+
+
+<body>
+
+<div id="wrapper">
+    <div id="header">
+        <h2>AHM - Auction House Manager</h2>
+    </div>
+</div>
+
+<div id="container">
+    <h3> Save Bid </h3>
+
+    <input type="hidden" th:field="*{auction_item.id}"/>
+    <input type="hidden" th:field="*{bidder.id}"/>
+
+    <form action="#" th:action="@{/bids/saveBid(auctionItemId=${auction_item.id},bidderId=2)}" th:object="${bid}" method="post">
+
+
+        <!-- this is to associate this date with bidder id -->
+        <input type="hidden" th:field="*{bidId}"/>
+
+        <!--<input type="hidden" th:attr="value = ${auctionItemId}" th:field="*{auction_item_id}"/>-->
+        <!--<input type="hidden" th:attr="value = ${bidderId}" th:field="*{bidder.id}"/>-->
+
+        <table>
+            <tbody>
+            <tr>
+                <td><label>Amount:</label></td>
+                <td><input type="text" th:field="*{bidAmount}"/></td>
+            </tr>
+
+            <tr>
+                <td><label></label></td>
+                <td><input type="submit" value="Save"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <p>
+        <a th:href="@{/auction_item/list}">Back to list</a>
+    </p>
+
+</div>
+
+</body>
+</html>

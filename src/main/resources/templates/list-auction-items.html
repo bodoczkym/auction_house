@@ -39,7 +39,7 @@
 
                 <!-- TODO refactor links to be outside of the table, with local references pointing towards them -->
                 <!-- display the update link -->
-                <td><a th:href="@{/bids/showFormForAdd(auctionItemId=${item.id})}">Bid</a>
+                <td><a th:href="@{/bids/showFormToBid(auctionItemId=${item.id},bidderId=2)}">Bid</a>
                     |
                     <a th:href="@{/auction_item/showFormForUpdate(auctionItemId=${item.id})}">Update</a>
                     |

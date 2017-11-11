@@ -1,7 +1,11 @@
 package com.shaddox.auction_spring.controller;
 
+import com.shaddox.auction_spring.entity.AuctionItem;
 import com.shaddox.auction_spring.entity.Bid;
+import com.shaddox.auction_spring.entity.Bidder;
+import com.shaddox.auction_spring.service.AuctionItemService;
 import com.shaddox.auction_spring.service.BidService;
+import com.shaddox.auction_spring.service.BidderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,19 +18,37 @@ public class BidController {
     @Autowired
     private BidService bidService;
 
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
+    @Autowired
+    private AuctionItemService auctionItemService;
+
+    @Autowired
+    private BidderService bidderService;
+
+    @GetMapping("/showFormToBid")
+    public String showFormForAdd(@RequestParam("auctionItemId") int auctionItemId, @RequestParam("bidderId") int bidderId,  Model theModel) {
+
+        AuctionItem theAuctionItem = auctionItemService.getAuctionItem(auctionItemId);
+        theModel.addAttribute("auction_item", theAuctionItem);
+
+        Bidder theBidder = bidderService.getBidder(bidderId);
+        theModel.addAttribute("bidder", theBidder);
 
         // create model attribute to bind form data
         Bid theBid = new Bid();
-
         theModel.addAttribute("bid", theBid);
 
         return "bid-form";
     }
 
-    @PostMapping("/saveBid")
-    public String saveBid(@ModelAttribute("current_bid}") Bid theBid) {
+    @RequestMapping("/saveBid")
+    public String saveBid(@ModelAttribute("current_bid}") Bid theBid, @RequestParam("auctionItemId") int auctionItemId, @RequestParam("bidderId") int bidderId) {
+
+        AuctionItem theAuctionItem = auctionItemService.getAuctionItem(auctionItemId);
+
+        Bidder theBidder = bidderService.getBidder(bidderId);
+
+        theBid.setAuctionItem(theAuctionItem);
+        theBid.setBidder(theBidder);
 
         bidService.saveBid(theBid);
 
@@ -36,7 +58,6 @@ public class BidController {
     @GetMapping("/delete")
     public String deleteAuctionItem(@RequestParam("bid_id") int theId) {
 
-        // delete the customer
         bidService.deleteBid(theId);
 
         return "redirect:/auction_item/list";
