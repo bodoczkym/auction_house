@@ -45,7 +45,7 @@ public class AuctionItemDAOImpl implements AuctionItemDAO {
         // begin transaction
         currentSession.beginTransaction();
 
-        // save/update the customer
+        // save/update the auction item
         currentSession.saveOrUpdate(theAuctionItem);
 
         // commit the transaction

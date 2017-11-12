@@ -4,7 +4,7 @@ import com.shaddox.auction_spring.entity.Bid;
 
 public interface BidDAO {
 
-    Bid getBid(int theId);
+    Bid getHighestBid(int theId);
 
     void saveBid(Bid theBid);
 

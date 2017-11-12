@@ -1,15 +1,12 @@
 package com.shaddox.auction_spring.controller;
 
 import com.shaddox.auction_spring.entity.AuctionItem;
-import com.shaddox.auction_spring.entity.Bid;
 import com.shaddox.auction_spring.service.AuctionItemService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,7 +15,7 @@ public class AuctionItemController {
 
 //    private static final Logger LOGGER = Logger.getLogger(AuctionItemController.class);
 
-    // need to inject our customer service
+    // need to inject our auction item service
     @Autowired
     private AuctionItemService auctionItemService;
 
@@ -70,8 +67,8 @@ public class AuctionItemController {
     @GetMapping("/delete")
     public String deleteAuctionItem(@RequestParam("auctionItemId") int theId) {
 
-        // delete the customer
-        auctionItemService.deleteCustomer(theId);
+        // delete the auction item
+        auctionItemService.deleteAuctionItem(theId);
 
         return "redirect:/auction_item/list";
     }

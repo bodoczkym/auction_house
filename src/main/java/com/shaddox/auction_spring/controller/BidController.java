@@ -25,7 +25,8 @@ public class BidController {
     private BidderService bidderService;
 
     @GetMapping("/showFormToBid")
-    public String showFormForAdd(@RequestParam("auctionItemId") int auctionItemId, @RequestParam("bidderId") int bidderId,  Model theModel) {
+    public String showFormForAdd(@RequestParam("auctionItemId") int auctionItemId, @RequestParam("bidderId") int
+            bidderId, /*@RequestParam("bidId") int bidId,*/   Model theModel) {
 
         AuctionItem theAuctionItem = auctionItemService.getAuctionItem(auctionItemId);
         theModel.addAttribute("auction_item", theAuctionItem);
@@ -35,13 +36,14 @@ public class BidController {
 
         // create model attribute to bind form data
         Bid theBid = new Bid();
-        theModel.addAttribute("bid", theBid);
+        theModel.addAttribute("newBid", theBid);
 
         return "bid-form";
     }
 
     @RequestMapping("/saveBid")
-    public String saveBid(@ModelAttribute("current_bid}") Bid theBid, @RequestParam("auctionItemId") int auctionItemId, @RequestParam("bidderId") int bidderId) {
+    public String saveBid(@ModelAttribute("current_bid}") Bid theBid, @RequestParam("auctionItemId") int
+            auctionItemId, @RequestParam("bidderId") int bidderId) {
 
         AuctionItem theAuctionItem = auctionItemService.getAuctionItem(auctionItemId);
 
@@ -50,6 +52,10 @@ public class BidController {
         theBid.setAuctionItem(theAuctionItem);
         theBid.setBidder(theBidder);
 
+        Bid currentBid = theAuctionItem.getHighestBid();
+        if (currentBid != null) {
+            bidService.deleteBid(currentBid.getBidId());
+        }
         bidService.saveBid(theBid);
 
         return "redirect:/auction_item/list";

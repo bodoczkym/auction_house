@@ -3,7 +3,7 @@
 <head>
     <title>List auction items</title>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link href="../static/css/add-customer-style.css" th:href="@{/css/add-customer-style.css}" rel="stylesheet"/>
+    <link href="../static/css/add-form-style.css" th:href="@{/css/add-form-style.css}" rel="stylesheet"/>
 
 </head>
 
@@ -12,17 +12,21 @@
 
 <div id="wrapper">
     <div id="header">
-        <h2>AHM - Auction House Manager</h2>
+        <h2>AHM - Auction House Manager </h2>
     </div>
 </div>
 
 <div id="container">
-    <h3> Save Bid </h3>
+    <div>
+        <h3> Save Bid </h3>
+
+        <p>Current highest bid:</p>
+    </div>
 
     <input type="hidden" th:field="*{auction_item.id}"/>
     <input type="hidden" th:field="*{bidder.id}"/>
 
-    <form action="#" th:action="@{/bids/saveBid(auctionItemId=${auction_item.id},bidderId=2)}" th:object="${bid}" method="post">
+    <form action="#" th:action="@{/bids/saveBid(auctionItemId=${auction_item.id},bidderId=2)}" th:object="${newBid}" method="post">
 
 
         <!-- this is to associate this date with bidder id -->
@@ -36,6 +40,7 @@
             <tr>
                 <td><label>Amount:</label></td>
                 <td><input type="text" th:field="*{bidAmount}"/></td>
+                <td th:if="${#fields.hasErrors('bidAmount')}" th:errors="*{bidAmount}">Bid Amount Error</td>
             </tr>
 
             <tr>

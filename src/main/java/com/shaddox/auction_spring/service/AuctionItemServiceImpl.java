@@ -41,7 +41,7 @@ public class AuctionItemServiceImpl implements AuctionItemService {
 
     @Override
     @Transactional
-    public void deleteCustomer(int theId) {
+    public void deleteAuctionItem(int theId) {
         auctionItemDAO.deleteAuctionItem(theId);
     }
 }

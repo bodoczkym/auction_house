@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class BidDAOImpl implements BidDAO {
 
     @Override
-    public Bid getBid(int theId) {
+    public Bid getHighestBid(int theId) {
         Session currentSession = HibernateUtil.getSession();
         return currentSession.get(Bid.class, theId);
     }

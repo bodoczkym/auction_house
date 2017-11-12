@@ -11,5 +11,5 @@ public interface AuctionItemService {
 
     AuctionItem getAuctionItem(int theId);
 
-    void deleteCustomer(int theId);
+    void deleteAuctionItem(int theId);
 }

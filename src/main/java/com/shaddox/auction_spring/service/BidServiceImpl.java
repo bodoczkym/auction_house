@@ -14,8 +14,8 @@ public class BidServiceImpl implements BidService {
 
     @Override
     @Transactional
-    public Bid getBid(int theId) {
-        return bidDAO.getBid(theId);
+    public Bid getHighestBid(int theId) {
+        return bidDAO.getHighestBid(theId);
     }
 
     @Override
